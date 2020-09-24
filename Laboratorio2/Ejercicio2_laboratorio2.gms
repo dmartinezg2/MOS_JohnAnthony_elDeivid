@@ -19,7 +19,7 @@ Table skills(i,j) representa las habilidades que tiene un jugar i
 Variables
          x(i) jugadores escogidos
          z funcion objetivo;
-Positive variables x;
+Binary variables x;
 
 Equations
 
@@ -28,19 +28,22 @@ Equations
          numDefensas al menos 4 jugadores deben poder jugar defensa
          promControl el promedio de control del equipo debe de ser al meno 2
          promDisparo     el promedio de disparo del equipo debe de al menos 2
-         promRebotes el promedio de rebotes debe ser de al menos 2;
+         promRebotes el promedio de rebotes debe ser de al menos 2
+         jugador2o3 se debe tener al 2 o al tres de titulares
+         maximoUnaVez el jugador sólo puede ser escogido 1 vez;
 
 objFunc(j)$(ord(j)=4) ..   z=e= sum((i),x(i)*skills(i,j));
 numJugadores     ..      sum(i, x(i)) =e= 5;
 numDefensas(j)$(ord(j)=5)        ..       sum(i, x(i)*skills(i,j)) =g= 4;
-promControl(j)$(ord(j)=1)        ..     sum(i,x(i)*skills(i,j))/5 =g= 2;
-promDisparo(j)$(ord(j)=2)        ..      sum(i,x(i)*skills(i,j))/5 =g= 2;
-promRebotes(j)$(ord(j)=3)        ..      sum(i,x(i)*skills(i,j))/5 =g=2;
-
+promControl(j)$(ord(j)=1)        ..       sum(i,x(i)*skills(i,j))/5 =g= 2;
+promDisparo(j)$(ord(j)=2)        ..       sum(i,x(i)*skills(i,j))/5 =g= 2;
+promRebotes(j)$(ord(j)=3)        ..       sum(i,x(i)*skills(i,j))/5 =g=2;
+maximoUnaVez(i)                  ..       x(i) =l=1;
+jugador2o3                       ..       x('2')+ x('3')=e=1;
 
 Model model1 /all/ ;
-option lp=CPLEX
-Solve model1 using lp maximizing z;
+option mip=CPLEX
+Solve model1 using mip maximizing z;
 
 Display z.l;
 Display x.l;
