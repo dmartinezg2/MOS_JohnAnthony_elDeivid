@@ -1,7 +1,19 @@
 
 Sets
 
-i  numero de losa      /losa1*losa20/;
+i  numero de losa      /p1*p20/
+t  tubos               /t1*t7/;
+
+Table tubos(t,i) tubos que se tienen
+         p1      p2      p3      p4      p5      p6      p7      p8      p9      p10     p11     p12     p13     p14     p15     p16     p17     p18     p19     p20
+t1       1       0       0       0       1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
+t2       0       1       1       0       0       1       1       0       0       0       0       0       0       0       0       0       0       0       0       0
+t3       0       0       0       0       1       0       0       0       1       0       0       0       0       0       0       0       0       0       0       0
+t4       0       0       0       0       0       0       0       0       1       1       0       0       1       1       0       0       0       0       0       0
+t5       0       0       0       0       0       0       0       0       0       1       1       0       0       1       1       0       0       0       0       0
+t6       0       0       0       0       0       0       0       0       0       0       0       0       1       0       0       0       1       0       0       0
+t7       0       0       0       0       0       0       0       1       0       0       0       1       0       0       0       1       0       0       1       1
+;
 Variables
 x(i)   levanto o no esa valdosa
 z        variable objetivo;
@@ -12,23 +24,10 @@ Binary Variable x;
 Equations
 
 objectiveFunction         Función objetivo
-tubo1                    Me encuentro al tubo 1
-tubo2                    Me encuentro al tubo 2
-tubo3                    Me encuentro al tubo 3
-tubo4                    Me encuentro al tubo 4
-tubo5                    Me encuentro al tubo 5
-tubo6                    Me encuentro al tubo 6
-tubo7                    Me encuentro al tubo 7;
+minimoTubo                Hay que ver todos los tubo es decir debemos saber el material de los 7;
 
-
-objectiveFunction        ..     z =e= sum((i), x(i));
-tubo1            ..              x('losa1') + x('losa5') =g= 1;
-tubo2            ..              x('losa2') + x('losa3')+x('losa6')+x('losa7') =g= 1;
-tubo3            ..              x('losa5') + x('losa9') =g= 1;
-tubo4            ..              x('losa9') + x('losa10')+x('losa13')+x('losa14') =g= 1;
-tubo5            ..              x('losa10') + x('losa11')+x('losa14')+x('losa15') =g= 1;
-tubo6            ..              x('losa13') + x('losa17') =g= 1;
-tubo7            ..              x('losa8') + x('losa12')+x('losa16')+x('losa20')+x('losa19') =g= 1;
+objectiveFunction        ..     z =e=sum((i), x(i));
+minimoTubo(t)            ..      sum((i),x(i)*tubos(t,i))=g=1;
 
 
 
