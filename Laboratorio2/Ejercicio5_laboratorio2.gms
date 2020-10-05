@@ -9,7 +9,7 @@ Scalar l distancia entr4e los nodos sedún sus coordenadas;
 
 Parameters
 
-         cordX(i) /1 20,2 22,3 9,4 25,5 21,6 29,7 14/
+         cordX(i) /1 20,2 22,3 9,4 3,5 21,6 29,7 14/
          cordY(i) /1 6,2 1,3 2,4 25,5 10,6 2,7 12/
          d(i,j) distancias
          loop((i,j),
