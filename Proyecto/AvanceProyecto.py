@@ -15,6 +15,11 @@ from __future__ import division
 from pyomo.opt import SolverFactory
 from pyomo.environ import *
 
+import sys
+import os
+
+os.system("clear")
+
 # SETS & PARAMETERS********************************************************************
 setNodos={1:"Calle 26 con 7", 2:"Calle 22 con 7", 3:"Calle 26 con Caracas", 4: "Carrera 7 con 40",5:"Universidad de los Andes"}
 
@@ -48,20 +53,48 @@ N= RangeSet(1,5)
 
 m.x = Var(N,N, domain=Binary)
 
-inputMinTiempo= int(input("Ingrese el tiempo mínimo de la ruta que quiere escoger \n"))
-print(inputMinTiempo)
+#inputMinTiempo= int(input("Ingrese el tiempo mínimo de la ruta que quiere escoger \n"))
+#print(inputMinTiempo)
 inputMaxDistancia= int(input("Ingrese distancia máxima de la ruta que quiere escoger \n"))
 print(inputMaxDistancia)
 
 # OBJECTIVE FUNCTION*******************************************************************
 m.obj = Objective(expr= sum(m.x[i,j]*setSeguridad[i,j] for i in N for j in N), sense=maximize )
-# CONSTRAINTS**************************************************************************
-def func_Distancia(m):
+# Functions****************************************************************************
+def regla_inicio(m,i):
+    if i ==1:
+        return sum(m.x[i,j] for j in N if j!=2 )==1
+    else:
+        return Constraint.Skip
+    
+def regla_intermedio(m,j):
+    if j==5:
+        return sum(m.x[i,j] for i in N)==1
+    else:
+        return Constraint.Skip
+    
+def regla_destino(m,i):
+    if i!=1 and i!=5:
+        return sum(m.x[i,j] for j in N) - sum(m.x[j,i] for j in N)==0
+    else:
+        return Constraint.Skip
+    
+
+def regla_distancia(m):
     return  sum(m.x[i,j]*setDistancia[i,j] for i in N for j in N) <= inputMaxDistancia
+
+# CONSTRAINTS**************************************************************************
+m.Distancia = Constraint(rule = regla_distancia)
+m.Inicio = Constraint(N, rule= regla_inicio)
+m.Intermedio = Constraint(N, rule= regla_intermedio)
+m.Destino = Constraint(N, rule=regla_destino)
+
 # APPLYING THE SOLVER******************************************************************
-m.Distancia = Constraint(rule = func_Distancia)
 
 SolverFactory("glpk").solve(m)
+
 sol =sum(m.x[i,j].value for i in N for j in N)
+
 m.display()
+
 print(f"Valor seguridad : {sol}")
