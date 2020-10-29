@@ -2,7 +2,7 @@
 """
 Created on Fri Oct 16 16:03:14 2020
 
-@author: Juan Antonio Restrepiño
+@author: Juan Antonio Restrepo y David Martinez
 
 Suponga que el gobernador de un departamento de 6 pueblos desea determinar en 
 cuál de ellos debe poner una estación de bomberos. Para ello la gobernación desea

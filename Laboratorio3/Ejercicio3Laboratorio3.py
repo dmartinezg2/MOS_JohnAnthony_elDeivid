@@ -2,7 +2,7 @@
 """
 Created on Fri Oct 23 21:11:36 2020
 
-@author: Juan Antonio Restrepo y David Martinez
+@author: David Martinez y Juan Antonio Restrepo
 """
 from __future__ import division
 from pyomo.environ import *
