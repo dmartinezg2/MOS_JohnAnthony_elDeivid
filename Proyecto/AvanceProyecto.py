@@ -15,10 +15,7 @@ from __future__ import division
 from pyomo.opt import SolverFactory
 from pyomo.environ import *
 
-import sys
-import os
 
-os.system("clear")
 
 # SETS & PARAMETERS********************************************************************
 setNodos={1:"Calle 26 con 7", 2:"Calle 22 con 7", 3:"Calle 26 con Caracas", 4: "Carrera 7 con 40",5:"Universidad de los Andes"}
@@ -55,6 +52,7 @@ m.x = Var(N,N, domain=Binary)
 
 #inputMinTiempo= int(input("Ingrese el tiempo mínimo de la ruta que quiere escoger \n"))
 #print(inputMinTiempo)
+
 inputMaxDistancia= int(input("Ingrese distancia máxima de la ruta que quiere escoger \n"))
 print(inputMaxDistancia)
 
@@ -67,13 +65,13 @@ def regla_inicio(m,i):
     else:
         return Constraint.Skip
     
-def regla_intermedio(m,j):
+def regla_destino(m,j):
     if j==5:
         return sum(m.x[i,j] for i in N)==1
     else:
         return Constraint.Skip
     
-def regla_destino(m,i):
+def regla_intermedio(m,i):
     if i!=1 and i!=5:
         return sum(m.x[i,j] for j in N) - sum(m.x[j,i] for j in N)==0
     else:
