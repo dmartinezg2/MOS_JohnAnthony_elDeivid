@@ -18,7 +18,7 @@ scalar ep epsilon /0/
 
 *Máximo de 2640 y mínimo de 2450, estos valores se hacen con el método de sumas ponderadas
 parameter ep_vec(iter) vector de valores de epsilon
-                         /it1 2650, it2 2625, it3 2600, it4 2575, it5 2550, it6 2525, it7 2500, it8 2475, it9 2450/
+                         /it1 2640, it2 2625, it3 2600, it4 2575, it5 2550, it6 2525, it7 2500, it8 2475, it9 2450/
 
 
 

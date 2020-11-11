@@ -1,4 +1,9 @@
-
+*************************************************************************
+***      Multiobjective case                                          ***
+***                                                                   ***
+***      Author: German Montoya                                       ***
+***      Modificado por: David Martinez y Juan Antonio Restrepo       ***
+*************************************************************************
 Set i   packet types / p1, p2 /;
 Set j   source nodes  / s1, s2, s3 /;
 Set k   destination nodes / d1, d2, d3, d4 /;
