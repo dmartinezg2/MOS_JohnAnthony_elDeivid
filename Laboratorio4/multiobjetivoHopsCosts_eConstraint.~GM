@@ -1,9 +1,9 @@
 *************************************************************************
 ***      Multiobjective case                                          ***
 ***                                                                   ***
-***      Author: German Montoya                                       ***
-***      Modificado por: David Martinez y Juan Antonio Restrepo       ***
+***      Author: Germ�n Montoya                                       ***
 *************************************************************************
+$set a = 5
 
 Sets
   i   network nodes / n1, n2, n3, n4, n5 /
@@ -14,9 +14,8 @@ set iter iteraciones /it1*it4/;
 
 scalar ep epsilon /0/;
 
-*El valor maximo debe ser de 5 y el minimo de 2 para f1.
 parameter ep_vec(iter) valores distintos de epsilon
-    /it1 2 , it2 2.5 , it3 4.8, it4 5 /;
+    /it1 2 , it2 3 , it3 4, it4 5 /;
 
 Table h(i,j) link capacity
                   n1       n2    n3     n4     n5
