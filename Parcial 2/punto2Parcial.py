@@ -2,7 +2,7 @@
 """
 Created on Sat Nov 14 19:55:29 2020
 
-@author: Juan Antonio "Chubby eater" Restrepo & David Martinez G
+@author: Juan Antonio Restrepo & David Martinez G
 """
 
 from __future__ import division
