@@ -28,7 +28,7 @@ m.x = Var(N,N,domain=Binary)
 
 # OBJECTIVE FUNCTION*******************************************************************
 
-m.obj=Objective(expr=sum(m.x[i, j] * arcos[i, j] for i in N for j in N) )
+m.obj=Objective(expr=sum(m.x[i, j] * arcos[i, j] for i in N for j in N), sense=minimize )
 
 # CONSTRAINTS**************************************************************************
 def source_rule(m, i):
