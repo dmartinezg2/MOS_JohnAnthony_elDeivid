@@ -19,6 +19,19 @@ from pyomo.environ import *
 
 # SETS & PARAMETERS********************************************************************
 setNodos={1:"Calle 26 con 7", 2:"Calle 22 con 7", 3:"Calle 26 con Caracas", 4: "Carrera 7 con 40",5:"Universidad de los Andes"}
+
+inputMaxTiempo=40
+
+inputMaxDistancia= 21
+
+inputMinCai=2
+
+inputMinCafeTaller=3
+
+nodoInicio=3
+
+nodoFinal=5
+
 # Conjunto de distancias entre los nodos
 setDistancia = {(1,1):999, (1,2):4,   (1,3):12,   (1,4):14, (1,5):999,\
          (2,1):4, (2,2):999, (2,3):999, (2,4):999, (2,5):4,\
@@ -58,34 +71,24 @@ N= RangeSet(1,5)
 
 m.x = Var(N,N, domain=Binary)
 
-inputMaxTiempo=60
-
-inputMaxDistancia= 50
-
-inputMinCai=1
-
-inputMinCafeTaller=1
-
-
-
 # OBJECTIVE FUNCTION*******************************************************************
 m.obj = Objective(expr= sum(m.x[i,j]*setSeguridad[i,j] for i in N for j in N), sense=maximize )
 # Functions****************************************************************************
 
 def regla_inicio(m,i):
-    if i ==1:
+    if i ==nodoInicio:
         return sum(m.x[i,j] for j in N if j!=2 )==1
     else:
         return Constraint.Skip
     
 def regla_destino(m,j):
-    if j==5:
+    if j==nodoFinal:
         return sum(m.x[i,j] for i in N)==1
     else:
         return Constraint.Skip
     
 def regla_intermedio(m,i):
-    if i!=1 and i!=5:
+    if i!=nodoInicio and i!=nodoFinal:
         return sum(m.x[i,j] for j in N) - sum(m.x[j,i] for j in N)==0
     else:
         return Constraint.Skip
@@ -116,9 +119,5 @@ m.Destino = Constraint(N, rule=regla_destino)
 # APPLYING THE SOLVER******************************************************************
 
 SolverFactory("glpk").solve(m)
-
-sol =sum(m.x[i,j].value for i in N for j in N)
-
 m.display()
 
-print(f"Valor seguridad : {sol}")
