@@ -16,6 +16,7 @@ Table skills(i,j) representa las habilidades que tiene un jugar i
          6       3       1       2       3       1       1       0
          7       3       2       2       1       1       0       1;
 
+
 Variables
          x(i) jugadores escogidos
          z funcion objetivo;
