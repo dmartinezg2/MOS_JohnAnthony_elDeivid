@@ -176,10 +176,10 @@ nodoEval = destino;
 while nodoEval ~= inicio
     plot(nodesCoordinates(nodoEval,1), nodesCoordinates(nodoEval,2), 'o', 'LineWidth',1,'MarkerEdgeColor','r', 'MarkerFaceColor','r', 'MarkerSize',7);
     indicePadre = actual==nodoEval;
-    nodoEval= padre(indicePadre);
+    nodoEval=
 end
 
-
+M = containers.Map(actual ,padre);
 
 
 
