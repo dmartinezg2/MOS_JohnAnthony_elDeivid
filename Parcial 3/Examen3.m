@@ -165,13 +165,6 @@ while length(evtQueue)>0
 end
 
 fprintf('Tiempo transcurrido: %f  \n',t);
-
-
-fprintf('%f  \n',actual);
-fprintf('-------- \n');
-fprintf(' %f  \n',padre);
-
-
 nodoEval = destino;
 while nodoEval ~= inicio
     plot(nodesCoordinates(nodoEval,1), nodesCoordinates(nodoEval,2), 'o', 'LineWidth',1,'MarkerEdgeColor','r', 'MarkerFaceColor','r', 'MarkerSize',7);
